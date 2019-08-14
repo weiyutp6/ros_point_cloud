@@ -41,11 +41,31 @@ def get_pointcloud2_xyz(data):
 	for p in cloud_points:
 		print 'x: ' + str(p[0]) +' y: ' + str(p[1]) + ' z: ' + str(p[2]) 
 	'''
-	rate = rospy.Rate(10)
+        rate = rospy.Rate(100000)
 	assert isinstance(data, PointCloud2)
 	gen = point_cloud2.read_points(data, field_names=("x", "y", "z"), skip_nans=True)
 	rate.sleep()
 	print type(gen)
+        obstacle_x = 0
+        obstacle_y = 0
+        counter = 0
 	for p in gen:
-		print " x : %.3f  y: %.3f  z: %.3f" %(p[0],p[1],p[2])
+                if p[0]>0:
+                        if (p[0]*p[0]) < 2500 :
+                            if (p[1]*p[1]) < 2500:
+                                obstacle_x += p[0]
+                                obstacle_y += p[1]
+                                counter += 1
+                                if (p[0]-obstacle_x/counter)*(p[0]-obstacle_x/counter)>0.5:
+                                    if (p[1]-obstacle_y/counter)*(p[1]-obstacle_y/counter)>0.5:
+                                         obstacle_x -= p[0]
+                                         obstacle_y -= p[1]
+                                         counter -= 1
+                                         print " obstacle : ( %.3f , %.3f ) " %(obstacle_x/counter , obstacle_y/counter)
+                                         obstacle_x = 0
+                                         obstacle_y = 0
+                                         counter = 0 
+		                print " x : %.3f  y: %.3f  z: %.3f" %(p[0],p[1],p[2])
+ 
+        print " obstacle : ( %.3f , %.3f ) " %(obstacle_x/counter , obstacle_y/counter)                                     
 	rospy.loginfo(rospy.get_caller_id() + 'get cloud')

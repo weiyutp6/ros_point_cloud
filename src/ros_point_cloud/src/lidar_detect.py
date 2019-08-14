@@ -10,6 +10,6 @@ if __name__ == '__main__':
 	rospy.Subscriber('/lidar_wamv/points',PointCloud2,get_pointcloud2_xyz)
 	rate = rospy.Rate(10)
 	while not rospy.is_shutdown():
-		hello = 'hello world ! %s' % rospy.get_time()
-		publish_ego_boat(ego_pub)
+	        hello = 'hello world ! %s' % rospy.get_time()
+        	publish_ego_boat(ego_pub)
 		rate.sleep()

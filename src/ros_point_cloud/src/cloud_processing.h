@@ -8,9 +8,9 @@ class PointConv{
     private:
         sensor_msgs::PointCloud2 output; 
     public:
-        PointConv();
-        ~PointConv()
-        void cloudProcessingCallback(const sensor_msgs::PointCloud2ConstPtr&);
+        PointConv(){};
+        ~PointConv(){};
+        void cloudProcessingCallback(const sensor_msgs::PointCloud2ConstPtr& input);
         void publisherNode();
         void subscriberNode();
         ros::NodeHandle m_nh;
