@@ -1,4 +1,0 @@
-<launch>
-    <node name = "cloud_processing" pkg = "ros_point_cloud" type = "cloud_processing" output = "screen" clear_params = "true" required = "true">
-    </node>
-</launch>
