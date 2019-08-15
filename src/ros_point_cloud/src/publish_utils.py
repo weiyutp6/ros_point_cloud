@@ -4,6 +4,7 @@ import rospy
 from sensor_msgs import point_cloud2
 from sensor_msgs.msg import PointCloud2
 from std_msgs.msg import Header
+from std_msgs.msg import String
 from visualization_msgs.msg import Marker
 from geometry_msgs.msg import Point
 FRAME_ID ='base_link'
@@ -46,26 +47,43 @@ def get_pointcloud2_xyz(data):
 	gen = point_cloud2.read_points(data, field_names=("x", "y", "z"), skip_nans=True)
 	rate.sleep()
 	print type(gen)
+        obstacle_pub = rospy.Publisher('pre_obstacle',String,queue_size = 10)
         obstacle_x = 0
+        class obstacles:
+            def __init__ (self, x, y) :
+                self.x = x
+                self.y = y
+        obstacleslist = []
         obstacle_y = 0
         counter = 0
+        first = True
+        pos_x = 0
+        pox_y = 0
 	for p in gen:
                 if p[0]>0:
-                        if (p[0]*p[0]) < 2500 :
-                            if (p[1]*p[1]) < 2500:
+                        if (p[0]*p[0]) < 400 :
+                            if (p[1]*p[1]) < 400:
+                                if first == True :
+                                    pos_x = p[0]
+                                    pos_y = p[1]
+                                    first = False 
+                                if (p[0]-pos_x)*(p[0]-pos_x)+(p[1]-pos_y)*(p[1]-pos_y)>0.4:
+                                    pos_x = obstacle_x/counter
+                                    pos_y = obstacle_y/counter
+                                    print " obstacle : ( %.3f , %.3f ) " %(pos_x , pos_y)
+                                    obstacle = " ( %.3f , %.3f ) " %(pos_x , pos_y)
+                                    obstacleslist.append(obstacles(pos_x,pos_y))
+                                    obstacle_x = 0
+                                    obstacle_y = 0
+                                    counter = 0 
+                                    first = True
+		                print " x : %.3f  y: %.3f  z: %.3f" %(p[0],p[1],p[2])
                                 obstacle_x += p[0]
                                 obstacle_y += p[1]
                                 counter += 1
-                                if (p[0]-obstacle_x/counter)*(p[0]-obstacle_x/counter)>0.5:
-                                    if (p[1]-obstacle_y/counter)*(p[1]-obstacle_y/counter)>0.5:
-                                         obstacle_x -= p[0]
-                                         obstacle_y -= p[1]
-                                         counter -= 1
-                                         print " obstacle : ( %.3f , %.3f ) " %(obstacle_x/counter , obstacle_y/counter)
-                                         obstacle_x = 0
-                                         obstacle_y = 0
-                                         counter = 0 
-		                print " x : %.3f  y: %.3f  z: %.3f" %(p[0],p[1],p[2])
- 
-        print " obstacle : ( %.3f , %.3f ) " %(obstacle_x/counter , obstacle_y/counter)                                     
+        print " obstacle : ( %.3f , %.3f ) " %(pos_x , pos_y)                                     
+        obstacle = " ( %.3f , %.3f ) " %(pos_x , pos_y)
+        obstacleslist.append(obstacles(pos_x,pos_y))
+                           
 	rospy.loginfo(rospy.get_caller_id() + 'get cloud')
+
