@@ -1,0 +1,6 @@
+<launch>
+    <arg name = "param_publish_file" default ="param_publish_utils"/>
+    <node name = "lidar_detect" pkg = "ros_point_cloud" type = "lidar_detect.py" output = "screen" clear_params = "true" required = "true">
+        <rosparam command = "load" file = "$(find ros_point_cloud)/config/$(arg param_publish_file).yaml"/>
+    </node>
+</launch>
