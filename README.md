@@ -50,9 +50,7 @@ process information from lidar_wamv
     $ sudo add-apt-repository ppa:v-launchpad-jochen-sprickerhof-de/pcl
     $ sudo apt-get update
     $ sudo apt-get install libpcl-dev
-    $ sudo apt install ros-<distro>-pcl-ros
-    
-Use the short name of your ROS distribution instead of <distro>
+    $ sudo apt install ros-melodic-pcl-ros
 
 ## 3.	Build our vrx package
 #### Download package
