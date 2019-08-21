@@ -51,6 +51,8 @@ process information from lidar_wamv
     $ sudo apt-get update
     $ sudo apt-get install libpcl-dev
     $ sudo apt install ros-<distro>-pcl-ros
+    
+Use the short name of your ROS distribution instead of <distro>
 
 ## 3.	Build our vrx package
 #### Download package
@@ -63,7 +65,7 @@ process information from lidar_wamv
     $ catkin_make
 #### Adding Path
     $ source .bashrc
-    $ source  ~/ntu_vrx/catkin_ws/devel/setup.bash
+    $ source  ~/ros_point_cloud/devel/setup.bash
 
 # Final test
 #### Open three terminals and do the following commands
