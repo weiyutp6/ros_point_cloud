@@ -44,7 +44,7 @@ process information from lidar_wamv
 
     $ roslaunch vrx_gazebo sandisland.launch
     
-## 2.Build PCL 1.8
+## 2.Build PCL
 ###Install and Build needed packages  
 
     $ sudo add-apt-repository ppa:v-launchpad-jochen-sprickerhof-de/pcl
