@@ -1,7 +1,7 @@
 # ros_point_cloud
 process information from lidar_wamv
 ## Three steps to build system:  
-### 1.Ros  2.PCL1.8 3.ros_point_cloud package
+### 1.ROS  2.PCL 3.ros_point_cloud package
 
 ## 1.Build ros and vrx environment  
 • Because the simulation uses some relatively new (as of winter 2019) features in ROS and Gazebo, it is highly recommended that you upgrade the packages installed on your system:
@@ -75,4 +75,4 @@ Use the short name of your ROS distribution instead of <distro>
 #### Open a fourth terminal and check the rostopic msg  
 
     $ rostopic echo /pre_obstacle
-If this msg is working than you are done.
+If this msg is working then you are done.
