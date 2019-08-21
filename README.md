@@ -67,7 +67,7 @@ process information from lidar_wamv
 
 # Final test
 #### Open three terminals and do the following commands
-    $ roslaunch vrx_gazebo perception.launch
+    $ roslaunch vrx_gazebo perception_task.launch
     $ roslaunch wamv_gazebo localization_example.launch
     $ roslaunch ros_point_cloud publish_utils.launch
 #### Open a fourth terminal and check the rostopic msg  
