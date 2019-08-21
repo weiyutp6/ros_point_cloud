@@ -32,6 +32,8 @@ def get_pointcloud2_xyz(data):
     print type(gen)
     find_obstacle(gen)
 
+pos_x = 0
+pos_y = 0
 def find_obstacle (gen):
     radius = rospy.get_param('~rad')
     accuracy = rospy.get_param('~accuracy')
@@ -41,8 +43,7 @@ def find_obstacle (gen):
     obstacle_y = 0
     counter = 0
     first = True
-    pos_x = 0
-    pox_y = 0
+
     for p in gen:
         if p[0]>1 and (p[0]*p[0])+(p[1]*p[1]) < radius*radius :
             if first == True :
@@ -73,10 +74,10 @@ def find_obstacle (gen):
                             leftlist.remove(check)
                             pos_x = obstacle_x/counter
                             pos_y = obstacle_y/counter
-        print " x : %.3f  y: %.3f  z: %.3f" %(p[0],p[1],p[2])
-        obstacle_x += p[0]
-        obstacle_y += p[1]
-        counter += 1
+            print " x : %.3f  y: %.3f  z: %.3f" %(p[0],p[1],p[2])
+            obstacle_x += p[0]
+            obstacle_y += p[1]
+            counter += 1
     print " obstacle : ( %.3f , %.3f ) " %(pos_x , pos_y)                                     
     obstacle = ' ( %.3f , %.3f ) ' %(pos_x , pos_y)
     obstacleslist.append(obstacle)
