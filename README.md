@@ -1,5 +1,5 @@
 # ros_point_cloud
-process information from lidar_wamv
+process information from lidar_wamv for perception task
 ## Three steps to build system:  
 ### 1.ROS  2.PCL 3.ros_point_cloud package
 
