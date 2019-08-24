@@ -69,7 +69,7 @@ process information from lidar_wamv for perception task
 #### Open three terminals and do the following commands
     $ roslaunch vrx_gazebo perception_task.launch
     $ roslaunch wamv_gazebo localization_example.launch
-    $ roslaunch ros_point_cloud publish_utils.launch
+    $ roslaunch ros_point_cloud .launch
 #### Open a fourth terminal and check the rostopic msg  
 
     $ rostopic echo /pre_obstacle
